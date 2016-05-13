@@ -11,6 +11,8 @@ import hmac
 import base64
 import utils
 import re
+from datetime import date, timedelta 
+
 try:
     from xml.etree.ElementTree import ParseError as XMLError
 except ImportError:
@@ -654,60 +656,58 @@ class Recommendations(MWS):
                     NextToken=token)
         return self.make_request(data, "POST")
 
-#### Finances API ####
- class Finances(MWS):
-     """ Amazon MWS Sellers API """
+class Finances(MWS):
+    """ Amazon MWS Sellers API """
  
-     URI = '/Finances/2015-05-01'
-     VERSION = '2015-05-01'
-     NS = '{http://mws.amazonservices.com/schema/Finances/2015-05-01}'
- 
-     def list_financial_event_groups(self, mrpp=str(100), after=None, before=None):
-         """
-         Returns financial event groups for a given date range.
-         """
-         if not after:
-             yesterday = date.today() - timedelta(1)
-             after = yesterday.isoformat() 
-         data = dict(Action='ListFinancialEventGroups', 
-                     MaxResultsPerPage = mrpp,
-                     FinancialEventGroupStartedAfter = after,
-                     FinancialEventGroupStartedBefore = before)
-         return self.make_request(data)
- 
-     def list_financial_event_groups_by_next_token(self, token):
-         """
-         Returns the next page of financial event groups using the NextToken parameter.
-         """
-         data = dict(Action='ListFinancialEventGroupsByNextToken', NextToken=token)
-         return self.make_request(data)
- 
-     def list_financial_events(self, mrpp=str(100), orderid=None, groupid=None, after=None, before=None):
-         """
-         Returns financial events for a given order, financial event group, or date range.
-         """
-         if not groupid or after or before:
-             yesterday = date.today() - timedelta(1)
-             after = yesterday.isoformat() 
-         data = dict(Action='ListFinancialEvents',
-                     MaxResultsPerPage = mrpp,
-                     AmazonOrderId = orderid,
-                     FinancialEventGroupId = groupid,
-                     PostedAfter = after,
-                     PostedBefore = before)
+    URI = '/Finances/2015-05-01'
+    VERSION = '2015-05-01'
+    NS = '{http://mws.amazonservices.com/schema/Finances/2015-05-01}'
+
+    def list_financial_event_groups(self, mrpp=str(100), after=None, before=None):
+        """
+        Returns financial event groups for a given date range.
+        """
+        if not after:
+            yesterday = date.today() - timedelta(1)
+            after = yesterday.isoformat() 
+        data = dict(Action='ListFinancialEventGroups', 
+                    MaxResultsPerPage = mrpp,
+                    FinancialEventGroupStartedAfter = after,
+                    FinancialEventGroupStartedBefore = before)
+        return self.make_request(data)
+
+    def list_financial_event_groups_by_next_token(self, token):
+        """
+        Returns the next page of financial event groups using the NextToken parameter.
+        """
+        data = dict(Action='ListFinancialEventGroupsByNextToken', NextToken=token)
         return self.make_request(data)
  
-     def list_financial_events_by_next_token(self, token):
-         """
-         Returns the next page of financial events using the NextToken parameter.
-         """
-         data = dict(Action='ListFinancialEventsByNextToken', NextToken=token)
-         return self.make_request(data)
+    def list_financial_events(self, mrpp=str(100), orderid=None, groupid=None, after=None, before=None):
+        """
+        Returns financial events for a given order, financial event group, or date range.
+        """
+        if not groupid or after or before:
+            yesterday = date.today() - timedelta(1)
+            after = yesterday.isoformat() 
+        data = dict(Action='ListFinancialEvents',
+                    MaxResultsPerPage = mrpp,
+                    AmazonOrderId = orderid,
+                    FinancialEventGroupId = groupid,
+                    PostedAfter = after,
+                    PostedBefore = before)
+        return self.make_request(data)
  
-     def get_service_status(self):
+    def list_financial_events_by_next_token(self, token):
+        """
+        Returns the next page of financial events using the NextToken parameter.
          """
-         Returns the operational status of the Finances API section.
-         """
-         data = dict(Action='GetServiceStatus')
-         return self.make_request(data)
+        data = dict(Action='ListFinancialEventsByNextToken', NextToken=token)
+        return self.make_request(data)
  
+    def get_service_status(self):
+        """
+        Returns the operational status of the Finances API section.
+        """
+        data = dict(Action='GetServiceStatus')
+        return self.make_request(data)
