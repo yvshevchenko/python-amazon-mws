@@ -32,6 +32,7 @@ __all__ = [
     'Products',
     'Recommendations',
     'Sellers',
+    'Finances'
 ]
 
 # See https://images-na.ssl-images-amazon.com/images/G/01/mwsportal/doc/en_US/bde/MWSDeveloperGuide._V357736853_.pdf page 8
