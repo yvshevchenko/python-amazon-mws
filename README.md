@@ -13,9 +13,8 @@ to expand it in order for it to cover most ( if not all ) operations in the Amaz
 This is still an ongoing project. If you would like to contribute, see below :).
 
 
-Its based on the [amazon-mws-python](http://code.google.com/p/amazon-mws-python).
+Its based on the [amazon-mws-python](https://bitbucket.org/richardpenman/amazon-mws-python).
 
-Checkout the documentation [here](https://python-amazon-mws.readthedocs.org/latest/).
 You can read the official Amazon MWS documentation [here](https://developer.amazonservices.com/).
 
 # To-Do
