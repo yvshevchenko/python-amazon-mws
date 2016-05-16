@@ -688,7 +688,7 @@ class Finances(MWS):
         """
         Returns financial events for a given order, financial event group, or date range.
         """
-        if not groupid or after or before:
+        if not (groupid or after or before):
             yesterday = date.today() - timedelta(1)
             after = yesterday.isoformat() 
         data = dict(Action='ListFinancialEvents',
